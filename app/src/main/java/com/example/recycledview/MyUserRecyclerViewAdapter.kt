@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recycledview.data.User
@@ -26,11 +27,13 @@ class MyUserRecyclerViewAdapter (
         val item = mValues[position]
         holder.textViewName.text = item.nombre
         holder.textViewLastName.text = item.lastName
+        holder.image.setImageURI(item.image)
     }
 
     inner class ViewHolder(private val mView: View) : RecyclerView.ViewHolder(mView) {
 
         val textViewName: TextView = mView.textViewUserName
         val textViewLastName: TextView = mView.textViewUserLastName
+        val image: ImageView = mView.image
     }
 }

@@ -1,5 +1,7 @@
 package com.example.recycledview.data
 
-data class User (val nombre: String, val lastName: String) {
+import android.net.Uri
+
+data class User (val nombre: String, val lastName: String, val image: Uri) {
 
 }
