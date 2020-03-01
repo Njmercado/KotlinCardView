@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.example.recycledview.MainFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="408dp"
         android:layout_height="476dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,5 +16,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph"
         app:layout_constraintVertical_bias="0.011" />
 </androidx.constraintlayout.widget.ConstraintLayout>

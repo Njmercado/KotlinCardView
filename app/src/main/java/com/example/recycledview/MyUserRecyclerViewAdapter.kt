@@ -34,6 +34,10 @@ class MyUserRecyclerViewAdapter(var list: MutableList<User>):RecyclerView.Adapte
             nombre.text = data.nombre
             apellido.text = data.lastName
             Glide.with(itemView.context).load(data.imgsrc).into(imagen)
+
+            itemView.setOnClickListener{
+
+            }
         }
     }
 }
