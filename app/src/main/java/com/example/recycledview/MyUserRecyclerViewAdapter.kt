@@ -49,6 +49,7 @@ class MyUserRecyclerViewAdapter(private val mValue: List<User>,private val mList
             nombre.text = data.name
             apellido.text = data.lastname
             Glide.with(itemView.context).load(data.imgsrc).into(imagen)
+
             itemView.setOnClickListener{
                 Toast.makeText(itemView.context, "${data.name}",Toast.LENGTH_LONG).show()
             }

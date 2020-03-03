@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.recycledview.data.User
@@ -34,6 +35,8 @@ class PersonFragment : Fragment() {
 
         binder = DataBindingUtil.setContentView(this.requireActivity(), R.layout.fragment_person)
         binder.user = user
+        //Glide.with(this.context).load(user.imgsrc).into(UserPhoto2)
+        Toast.makeText(this.context, "Perfil cargado...", Toast.LENGTH_LONG).show()
     }
 
 
