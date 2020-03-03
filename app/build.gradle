@@ -21,6 +21,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+    }
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -41,6 +45,6 @@ dependencies {
     def nav_version = "2.3.0-alpha01"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
+    //annotationProcessor 'com.github.bumptech.glide:compiler:3.8.0'
     implementation 'com.google.android.material:material:1.1.0'
 }
