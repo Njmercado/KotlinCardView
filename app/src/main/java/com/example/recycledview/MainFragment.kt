@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recycledview.Util.getStringRequest
 import com.example.recycledview.data.User
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
@@ -21,15 +24,18 @@ class MainFragment : Fragment(), MyUserRecyclerViewAdapter.onListInteractions {
     val users = mutableListOf<User>()
     private var adapter : MyUserRecyclerViewAdapter? = null
     lateinit var navController: NavController
+    private lateinit var viewModel: RandomUserViewModel
+    private var userList = mutableListOf<RandomUser>()
+    //lateinit var binderP : FragmentPersonBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+        //binderP = DataBindingUtil.inflate(inflater,R.layout.fragment_main,container, false)
 
-        users.add(User("Jean", "Palacio",50,"Trabajando","https://randomuser.me/api/portraits/men/67.jpg"))
+        /*users.add(User("Jean", "Palacio",50,"Trabajando","https://randomuser.me/api/portraits/men/67.jpg"))
         users.add(User("Nino", "Mercado",12,"Trabajando","https://randomuser.me/api/portraits/men/3.jpg"))
         users.add(User("Juan", "Martinez",13,"Trabajando", "https://randomuser.me/api/portraits/men/45.jpg"))
         users.add(User("Jorge", "Ramirez",18,"Trabajando", "https://randomuser.me/api/portraits/men/50.jpg"))
@@ -48,19 +54,25 @@ class MainFragment : Fragment(), MyUserRecyclerViewAdapter.onListInteractions {
         users.add(User("Marco", "Di Matteo",87,"Emprendiendo", "https://randomuser.me/api/portraits/men/58.jpg"))
         users.add(User("Luca", "Toni",28,"Emprendiendo", "https://randomuser.me/api/portraits/men/59.jpg"))
         users.add(User("Romulo", "Giaccherini",32,"Emprendiendo","https://randomuser.me/api/portraits/men/61.jpg"))
-        users.add(User("Paolo", "Maldini",35,"Emprendiendo", "https://randomuser.me/api/portraits/men/62.jpg"))
+        users.add(User("Paolo", "Maldini",35,"Emprendiendo", "https://randomuser.me/api/portraits/men/62.jpg")) */
 
+        viewModel = ViewModelProvider(this).get(RandomUserViewModel::class.java)
+        viewModel.addUsers()
 
-        adapter = MyUserRecyclerViewAdapter(users,this)
-        view.recyclerv.layoutManager = LinearLayoutManager(context)
-        view.recyclerv.adapter = adapter
+        VolleySingleton.getInstance(activity!!.applicationContext).addToRequestQueue(getStringRequest())
+
+        loadData()
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         navController = Navigation.findNavController(view)
+        adapter = MyUserRecyclerViewAdapter(users,this)
+        view.recyclerv.layoutManager = LinearLayoutManager(context)
+        view.recyclerv.adapter = adapter
 
     }
 
@@ -72,6 +84,22 @@ class MainFragment : Fragment(), MyUserRecyclerViewAdapter.onListInteractions {
 
       override fun onListButtonInteraction(item: User?) {
 
+    }
+    fun loadData() {
+        viewModel.getUsers().observe(viewLifecycleOwner, Observer { obsUsers ->
+            run {
+                userList = obsUsers as MutableList<RandomUser>
+
+                for(randUser in userList) {
+                    var user = User(
+                        randUser.name.first, randUser.name.last,
+                        randUser.email, randUser.phone,randUser.picture.large
+                    )
+                    users.add(user)
+                }
+                adapter!!.updateData()
+            }
+        })
     }
 
 }

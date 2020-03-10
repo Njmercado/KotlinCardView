@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="88dp"
                 android:layout_marginTop="36dp"
-                android:text="@{StringUtils.formatAge(user.age)}"
+                android:text="@{user.phone}"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="@{user.estado}"
+                android:text="@{user.email}"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

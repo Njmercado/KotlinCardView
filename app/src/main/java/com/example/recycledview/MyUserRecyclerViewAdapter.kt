@@ -14,16 +14,12 @@ import com.example.recycledview.data.User
 class MyUserRecyclerViewAdapter(private val mValue: List<User>,private val mListener : MyUserRecyclerViewAdapter.onListInteractions):RecyclerView.Adapter<MyUserRecyclerViewAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         var va = LayoutInflater.from(parent.context).inflate(R.layout.row,parent,false)
-
         return ViewHolder(va)
-
     }
 
     override fun getItemCount(): Int {
         return mValue.size
-
     }
 
     override fun onBindViewHolder(holder: MyUserRecyclerViewAdapter.ViewHolder, position: Int) {
@@ -31,14 +27,8 @@ class MyUserRecyclerViewAdapter(private val mValue: List<User>,private val mList
 
         holder.itemView.setOnClickListener{
             mListener?.onListItemInteraction(mValue[position])
-
         }
-
-
-
-
     }
-
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
 
@@ -59,6 +49,9 @@ class MyUserRecyclerViewAdapter(private val mValue: List<User>,private val mList
         fun onListItemInteraction(item: User?)
 
         fun onListButtonInteraction(item: User?)
+    }
+    public fun updateData() {
+        notifyDataSetChanged()
     }
 }
 

@@ -23,8 +23,6 @@ class PersonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_person, container, false)
         binder = DataBindingUtil.inflate(inflater,R.layout.fragment_person,container,false)
         return binder.root
     }
@@ -33,10 +31,9 @@ class PersonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         user = arguments?.getParcelable("data")!!
 
-        binder = DataBindingUtil.setContentView(this.requireActivity(), R.layout.fragment_person)
+        //binder = DataBindingUtil.setContentView(this.requireActivity(), R.layout.fragment_person)
         binder.user = user
-        //Glide.with(this.context).load(user.imgsrc).into(UserPhoto2)
-        Toast.makeText(this.context, "Perfil cargado...", Toast.LENGTH_LONG).show()
+        Toast.makeText(this.context, "Perfil cargado", Toast.LENGTH_LONG).show()
     }
 
 
